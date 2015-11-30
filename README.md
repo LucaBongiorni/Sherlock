@@ -1,5 +1,5 @@
 # Sherlock
-Sherlock is simple Python Ttol design to find vulnerabilities and open directory and files in Top Frameworks and Web Applications for my Web Scraping Studies and Academic Purposes
+Sherlock is simple Python Tool design to find vulnerabilities, open directories and files in Top Frameworks and Web Applications for my Web Scraping Studies and Academic Purposes
 
 #HOW TO USE 
 #Clone the Project 
