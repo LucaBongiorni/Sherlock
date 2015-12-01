@@ -22,6 +22,7 @@ def banner():
 #FUNCÇÕES QUE TRATAM OS FRAMEWORKS
 
 def codeigniter(thread):
+    global web_paths
     directory = 'frameworks/CodeIgniter/'
     os.chdir(directory)
 
@@ -36,11 +37,12 @@ def codeigniter(thread):
             if os.path.splitext(files)[1] not in filters:
                 web_paths.put(remote_path)
 
-    threads(directory, thread, web_paths)
+    threads(directory, thread)
 
 
 
 def joomla(thread):
+    global web_paths
     directory = 'frameworks/Joomla/'
     os.chdir(directory)
 
@@ -55,10 +57,11 @@ def joomla(thread):
             if os.path.splitext(files)[1] not in filters:
                 web_paths.put(remote_path)
 
-    threads(directory, thread, web_paths)
+    threads(directory, thread)
 
 
 def drupal(thread):
+    global web_paths
     directory = 'frameworks/Drupal/'
     os.chdir(directory)
 
@@ -73,10 +76,11 @@ def drupal(thread):
             if os.path.splitext(files)[1] not in filters:
                 web_paths.put(remote_path)
 
-    threads(directory, thread, web_paths)
+    threads(directory, thread)
 
 
 def moodle(thread):
+    global web_paths
     directory = 'frameworks/Moodle/'
     os.chdir(directory)
 
@@ -91,10 +95,11 @@ def moodle(thread):
             if os.path.splitext(files)[1] not in filters:
                 web_paths.put(remote_path)
 
-    threads(directory, thread, web_paths)
+    threads(directory, thread)
 
 
 def magento(thread):
+    global web_paths
     directory = 'frameworks/Magento/'
     os.chdir(directory)
 
@@ -109,9 +114,10 @@ def magento(thread):
             if os.path.splitext(files)[1] not in filters:
                 web_paths.put(remote_path)
 
-    threads(directory, thread, web_paths)
+    threads(directory, thread)
 
 def wordpress(thread):
+    global web_paths
     directory = 'frameworks/Wordpress/'
     os.chdir(directory)
 
@@ -126,10 +132,11 @@ def wordpress(thread):
             if os.path.splitext(files)[1] not in filters:
                 web_paths.put(remote_path)
 
-    threads(directory, thread, web_paths)
+    threads(directory, thread)
 
 
 def general(thread):
+    global web_paths
     #Constrói a Wordlist
     directory = 'frameworks/General/all-dirs.txt'
     fd = open(directory, "rb")
@@ -140,33 +147,66 @@ def general(thread):
         word.rstrip('\n')
         web_paths.put(word)
 
-    threads(directory, thread, web_paths)
+    threads(directory, thread)
+
 
 def subdomain_finder(thread):
-    #Constroi a Wordlist
-    directory = 'frameword/General/subdomains.txt'
+    global web_paths
+    #Constrói a Wordlist
+    directory = 'frameworks/General/subdomains.txt'
     fd = open(directory, "rb")
     raw_words = fd.readlines()
-    web_paths = Queue.Queue
+    web_paths = Queue.Queue()
+
+    for word in raw_words:
+        word.rstrip('\n')
+        web_paths.put(word)
+
+    subdomain_thread(thread)
 
 
+
+def subdomain_thread(thread):
+    for i in range(thread):
+        print "Spawning Thread: %d" % i
+        t = threading.Thread(target=subdomain_construct)
+        t.start()
+
+
+
+
+def subdomain_construct():
+    while not web_paths.empty():
+        word = web_paths.get()
+        word = word.replace('\n','')
+        url = 'http://%s.%s' % (word, target)
+        request = urllib2.Request(url)
+
+        try:
+            response = urllib2.urlopen(request)
+            content = response.read()
+
+            print "[%d] => %s" % (response.code, url)
+            response.close()
+
+        except urllib2.HTTPError as error:
+            print "[%d] => %s" % (error.code, url)
+            pass
 
 
 #FUNÇÕES DO SISTEMA
-
 #Função responsável pelas Threads
-
-def threads(directory, thread, web_paths):
+def threads(directory, thread):
 
     for i in range(thread):
-        print "Spawning Thread: %d" % thread
-        t = threading.Thread(target=test_remote(web_paths))
+        print "Spawning Thread: %d" % i
+        t = threading.Thread(target=test_remote)
         t.start()
 
 
 
 #Função de Construção e Teste das URLS
-def test_remote(web_paths):
+def test_remote():
 
     while not web_paths.empty():
         path = web_paths.get()
@@ -190,13 +230,13 @@ def main ():
     global filters
     global target
 
-    print "1 - CodeIgniter Analysis"
-    print "2 - Joomla Analysis"
-    print "3 - Drupal Analysis"
-    print "4 - Moodle Analysis"
+    print "1 - CodeIgniter Analysis - v3.0.3"
+    print "2 - Joomla Analysis - v3.4.5"
+    print "3 - Drupal Analysis - v8.0.0"
+    print "4 - Moodle Analysis - v3.0"
     print "5 - Magento Analysis"
-    print "6 - Wordpress Analysis"
-    print "7 - General Analysis"
+    print "6 - Wordpress Analysis - v4.3.1"
+    print "7 - General Analysis - General or Custom Sites"
     print "8 - Subdomain Finder"
     print "9 - Admin Page Finder"
     print "0 - Exit"

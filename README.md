@@ -20,8 +20,8 @@ Sherlock is simple Python Tool design to find vulnerabilities, open directories 
 * [+] CodeIgniter 3.0.3
 * [+] Drupal 8.0.0
 * [-] Magento - NOK
-* [-] General - NOK
-* [-] Subdomain Finder - NOK
+* [+] General - Custom and General Sites
+* [+] Subdomain Finder - Subdomains Checks
 * [-] Admin Page Finder - NOK
 
 
