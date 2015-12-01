@@ -84,7 +84,7 @@ def drupal(thread):
 
 
 
-#FUNÇÃO DE CHAMAADA DO MOODLE FRAMEWORK
+#FUNÇÃO DE CHAMADA DO MOODLE FRAMEWORK
 def moodle(thread):
     global web_paths
     directory = 'frameworks/Moodle/'
@@ -104,7 +104,7 @@ def moodle(thread):
     threads(directory, thread)
 
 
-#FUNÇÃO DE CHAMAADA DO MEGENTO FRAMEWORK
+#FUNÇÃO DE CHAMADA DO MEGENTO FRAMEWORK
 def magento(thread):
     global web_paths
     directory = 'frameworks/Magento/'
@@ -124,7 +124,7 @@ def magento(thread):
     threads(directory, thread)
 
 
-#FUNÇÃO DE CHAMAADA DO WORDPRESS FRAMEWORK
+#FUNÇÃO DE CHAMADA DO WORDPRESS FRAMEWORK
 def wordpress(thread):
     global web_paths
     directory = 'frameworks/Wordpress/'
@@ -143,7 +143,7 @@ def wordpress(thread):
 
     threads(directory, thread)
 
-#FUNÇÃO DE CHAMAADA DO GENERAL ANALYSIS
+#FUNÇÃO DE CHAMADA DO GENERAL ANALYSIS
 def general(thread):
     global web_paths
     #Constrói a Wordlist
@@ -158,7 +158,7 @@ def general(thread):
 
     threads(directory, thread)
 
-#FUNÇÃO DE CHAMAADA DO SUBDOMAIN FINDER
+#FUNÇÃO DE CHAMADA DO SUBDOMAIN FINDER
 def subdomain_finder(thread):
     global web_paths
     #Constrói a Wordlist
