@@ -7,6 +7,8 @@ default
 Repository
 admin
 FCKeditor
+teste.php
+config.php
 templates_c
 AUTHORS
 style

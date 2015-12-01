@@ -137,9 +137,18 @@ def general(thread):
     web_paths = Queue.Queue()
 
     for word in raw_words:
+        word.rstrip('\n')
         web_paths.put(word)
 
     threads(directory, thread, web_paths)
+
+def subdomain_finder(thread):
+    #Constroi a Wordlist
+    directory = 'frameword/General/subdomains.txt'
+    fd = open(directory, "rb")
+    raw_words = fd.readlines()
+    web_paths = Queue.Queue
+
 
 
 
@@ -150,7 +159,7 @@ def general(thread):
 def threads(directory, thread, web_paths):
 
     for i in range(thread):
-        print "Spawning Thread: %d" % i
+        print "Spawning Thread: %d" % thread
         t = threading.Thread(target=test_remote(web_paths))
         t.start()
 
