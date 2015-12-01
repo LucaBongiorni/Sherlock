@@ -95,7 +95,7 @@ def moodle(thread):
 
 
 def magento(thread):
-    directory = 'frameworks/Moodle/'
+    directory = 'frameworks/Magento/'
     os.chdir(directory)
 
     web_paths = Queue.Queue()
@@ -130,19 +130,14 @@ def wordpress(thread):
 
 
 def general(thread):
-    directory = 'frameworks/General/'
-    os.chdir(directory)
-
+    #Constrói a Wordlist
+    directory = 'frameworks/General/all-dirs.txt'
+    fd = open(directory, "rb")
+    raw_words = fd.readlines()
     web_paths = Queue.Queue()
 
-    for r,d,f in os.walk("."):
-        for files in f:
-            remote_path = "%s/%s" % (r, files)
-            if remote_path.startswith("."):
-                remote_path = remote_path[1:]
-
-            if os.path.splitext(files)[1] not in filters:
-                web_paths.put(remote_path)
+    for word in raw_words:
+        web_paths.put(word)
 
     threads(directory, thread, web_paths)
 
@@ -153,7 +148,6 @@ def general(thread):
 #Função responsável pelas Threads
 
 def threads(directory, thread, web_paths):
-    thread = int(thread)
 
     for i in range(thread):
         print "Spawning Thread: %d" % i
@@ -203,6 +197,7 @@ def main ():
     thread = raw_input("Inform a Number of Threads: ")
     filters = ['.jpg', '.gif', '.png', '.css']
     option = int(option)
+    thread = int(thread)
 
     if option == 1:
         codeigniter(thread)
