@@ -21,6 +21,7 @@ def banner():
     main()
 #FUNCÇÕES QUE TRATAM OS FRAMEWORKS
 
+#FUNÇÃO DE CHAMADA DO CODEIGNITER FRAMEWORK
 def codeigniter(thread):
     global web_paths
     directory = 'frameworks/CodeIgniter/'
@@ -41,6 +42,7 @@ def codeigniter(thread):
 
 
 
+#FUNÇÃO DE CHAMADA DO JOOMLA FRAMEWORK
 def joomla(thread):
     global web_paths
     directory = 'frameworks/Joomla/'
@@ -60,6 +62,8 @@ def joomla(thread):
     threads(directory, thread)
 
 
+
+#FUNÇÃO DE CHAMADA DO DRUPAL FRAMEWORK
 def drupal(thread):
     global web_paths
     directory = 'frameworks/Drupal/'
@@ -79,6 +83,8 @@ def drupal(thread):
     threads(directory, thread)
 
 
+
+#FUNÇÃO DE CHAMAADA DO MOODLE FRAMEWORK
 def moodle(thread):
     global web_paths
     directory = 'frameworks/Moodle/'
@@ -98,6 +104,7 @@ def moodle(thread):
     threads(directory, thread)
 
 
+#FUNÇÃO DE CHAMAADA DO MEGENTO FRAMEWORK
 def magento(thread):
     global web_paths
     directory = 'frameworks/Magento/'
@@ -116,6 +123,8 @@ def magento(thread):
 
     threads(directory, thread)
 
+
+#FUNÇÃO DE CHAMAADA DO WORDPRESS FRAMEWORK
 def wordpress(thread):
     global web_paths
     directory = 'frameworks/Wordpress/'
@@ -134,7 +143,7 @@ def wordpress(thread):
 
     threads(directory, thread)
 
-
+#FUNÇÃO DE CHAMAADA DO GENERAL ANALYSIS
 def general(thread):
     global web_paths
     #Constrói a Wordlist
@@ -149,7 +158,7 @@ def general(thread):
 
     threads(directory, thread)
 
-
+#FUNÇÃO DE CHAMAADA DO SUBDOMAIN FINDER
 def subdomain_finder(thread):
     global web_paths
     #Constrói a Wordlist
@@ -165,7 +174,7 @@ def subdomain_finder(thread):
     subdomain_thread(thread)
 
 
-
+#GERA AS THREADS DOS SUBDOMÍNIOS
 def subdomain_thread(thread):
     for i in range(thread):
         print "Spawning Thread: %d" % i
@@ -174,7 +183,7 @@ def subdomain_thread(thread):
 
 
 
-
+#CONSTROI AS URLS E TESTA OS SUBDOMÍNIOS
 def subdomain_construct():
     while not web_paths.empty():
         word = web_paths.get()
@@ -195,6 +204,8 @@ def subdomain_construct():
 
 
 #FUNÇÕES DO SISTEMA
+
+
 #Função responsável pelas Threads
 def threads(directory, thread):
 
@@ -202,7 +213,6 @@ def threads(directory, thread):
         print "Spawning Thread: %d" % i
         t = threading.Thread(target=test_remote)
         t.start()
-
 
 
 #Função de Construção e Teste das URLS
